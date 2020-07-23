@@ -1,10 +1,60 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import {
+	StyleSheet,
+	View,
+	Image,
+	ScrollView,
+	ActivityIndicator,
+} from "react-native";
 import { Avatar, Text, Button } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import { DATA } from "../data/userdata";
+
+const Header = () => {
+	return (
+		<View style={styles.header}>
+			<Avatar
+				rounded
+				source={require("../assets/profile-images/profileimage1.jpeg")}
+				size="large"
+				containerStyle={styles.avatarStyle}
+			/>
+			<View style={{ backgroundColor: "white" }}>
+				<View style={styles.postFollowStyle}>
+					<View style={{ alignItems: "center", justifyContent: "center" }}>
+						<Text style={styles.numFollowersText}>238</Text>
+						<Text style={styles.followersText}>posts</Text>
+					</View>
+					<View style={{ alignItems: "center", justifyContent: "center" }}>
+						<Text style={styles.numFollowersText}>328K</Text>
+						<Text style={styles.followersText}>followers</Text>
+					</View>
+					<View style={{ alignItems: "center", justifyContent: "center" }}>
+						<Text style={styles.numFollowersText}>381K</Text>
+						<Text style={styles.followersText}>following</Text>
+					</View>
+				</View>
+				<View style={styles.followButtonsContainer}>
+					<Button
+						title="Follow"
+						type="solid"
+						buttonStyle={styles.followButtonStyle}
+						titleStyle={{ fontSize: 12 }}
+					/>
+					<Button
+						icon={<Ionicons name="md-arrow-dropdown" size={18} color="white" />}
+						buttonStyle={styles.dropDownButonStyle}
+					/>
+				</View>
+			</View>
+		</View>
+	);
+};
 
 const Profile = ({ route }) => {
+	const user = DATA[0];
+
 	return (
 		<View style={styles.container}>
 			<StatusBar
@@ -13,44 +63,21 @@ const Profile = ({ route }) => {
 				backgroundColor="lightgray"
 				translucent={false}
 			/>
-			<View style={styles.header}>
-				<Avatar
-					rounded
-					source={require("../assets/profile-images/profileimage1.jpeg")}
-					size="large"
-					containerStyle={styles.avatarStyle}
-				/>
-				<View style={{ backgroundColor: "white" }}>
-					<View style={styles.postFollowStyle}>
-						<View style={{ alignItems: "center", justifyContent: "center" }}>
-							<Text style={styles.numFollowersText}>238</Text>
-							<Text style={styles.followersText}>posts</Text>
-						</View>
-						<View style={{ alignItems: "center", justifyContent: "center" }}>
-							<Text style={styles.numFollowersText}>328K</Text>
-							<Text style={styles.followersText}>followers</Text>
-						</View>
-						<View style={{ alignItems: "center", justifyContent: "center" }}>
-							<Text style={styles.numFollowersText}>381K</Text>
-							<Text style={styles.followersText}>following</Text>
-						</View>
-					</View>
-					<View style={styles.followButtonsContainer}>
-						<Button
-							title="Follow"
-							type="solid"
-							buttonStyle={styles.followButtonStyle}
-							titleStyle={{ fontSize: 12 }}
-						/>
-						<Button
-							icon={
-								<Ionicons name="md-arrow-dropdown" size={18} color="white" />
-							}
-							buttonStyle={styles.dropDownButonStyle}
-						/>
-					</View>
-				</View>
+			<Header />
+			<View style={styles.bio}>
+				<Text>{user.bio}</Text>
 			</View>
+			<Button type="outline" title="Call" buttonStyle={styles.callButton} />
+
+			<ScrollView contentContainerStyle={styles.scrollView}>
+				{user.posts.map((post, index) => (
+					<Image
+						source={post.uri}
+						key={index}
+						style={{ width: 137, height: 150 }}
+					/>
+				))}
+			</ScrollView>
 		</View>
 	);
 };
@@ -103,6 +130,25 @@ const styles = StyleSheet.create({
 		color: "darkgray",
 		margin: 0,
 		padding: 0,
+	},
+
+	bio: {
+		marginLeft: 12,
+		marginTop: 2,
+		marginBottom: 10,
+	},
+	callButton: {
+		height: 36,
+		marginTop: 15,
+		marginLeft: 1.5,
+		marginRight: 1.5,
+	},
+	scrollView: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		alignContent: "center",
+		padding: 0,
+		margin: 0,
 	},
 });
 

@@ -72,7 +72,6 @@ export default function App() {
 						}
 
 						if (route.name === "Profile") {
-							//iconName = focused ? "md-heart" : "md-heart-empty";
 							return (
 								<Avatar
 									rounded

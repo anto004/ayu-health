@@ -5,14 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Ionicons, Feather } from "@expo/vector-icons";
 import { Avatar, Text } from "react-native-elements";
-
-function ProfileScreen() {
-	return (
-		<View style={styles.container}>
-			<Text>Profile Component</Text>
-		</View>
-	);
-}
+import Profile from "./components/Profile";
 
 function ActivityScreen() {
 	return (
@@ -49,7 +42,6 @@ function HomeScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-	//<StatusBar style="auto" />
 	return (
 		<NavigationContainer>
 			<Tab.Navigator
@@ -84,7 +76,7 @@ export default function App() {
 							return (
 								<Avatar
 									rounded
-									source={require("./assets/profile-images/profileimage3.jpeg")}
+									source={require("./assets/profile-images/profileimage1.jpeg")}
 								/>
 							);
 						}
@@ -95,11 +87,11 @@ export default function App() {
 					inactiveTintColor: "gray",
 				}}
 			>
+				<Tab.Screen name="Profile" component={Profile} />
 				<Tab.Screen name="Home" component={HomeScreen} />
 				<Tab.Screen name="Search" component={SearchScreen} />
 				<Tab.Screen name="Add" component={AddScreen} />
 				<Tab.Screen name="Activity" component={ActivityScreen} />
-				<Tab.Screen name="Profile" component={ProfileScreen} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);

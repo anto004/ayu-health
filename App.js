@@ -8,6 +8,9 @@ import { AntDesign, Ionicons, Feather } from "@expo/vector-icons";
 import { Avatar, Text } from "react-native-elements";
 import Profile from "./components/Profile";
 import Post from "./components/Post";
+import { DATA } from "./data/userdata";
+
+const USERNAME = DATA[0].username;
 
 function ActivityScreen() {
 	return (
@@ -104,7 +107,17 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
-				<Stack.Screen name="Home" component={HomeTabs} />
+				<Stack.Screen
+					name="Home"
+					component={HomeTabs}
+					options={{
+						title: USERNAME,
+						headerTitleStyle: {
+							alignSelf: "center",
+							fontSize: 18,
+						},
+					}}
+				/>
 				<Stack.Screen name="Post" component={Post} />
 			</Stack.Navigator>
 		</NavigationContainer>

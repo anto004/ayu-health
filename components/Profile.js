@@ -4,7 +4,7 @@ import {
 	View,
 	Image,
 	ScrollView,
-	ActivityIndicator,
+	TouchableOpacity,
 } from "react-native";
 import { Avatar, Text, Button } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
@@ -52,7 +52,7 @@ const Header = () => {
 	);
 };
 
-const Profile = ({ route }) => {
+const Profile = ({ route, navigation }) => {
 	const user = DATA[0];
 
 	return (
@@ -67,15 +67,21 @@ const Profile = ({ route }) => {
 			<View style={styles.bio}>
 				<Text>{user.bio}</Text>
 			</View>
-			<Button type="outline" title="Call" buttonStyle={styles.callButton} />
+			<Button
+				type="outline"
+				title="Call"
+				raised={true}
+				buttonStyle={styles.callButton}
+			/>
 
 			<ScrollView contentContainerStyle={styles.scrollView}>
 				{user.posts.map((post, index) => (
-					<Image
-						source={post.uri}
+					<TouchableOpacity
 						key={index}
-						style={{ width: 137, height: 150 }}
-					/>
+						onPress={() => navigation.navigate("Post")}
+					>
+						<Image source={post.uri} style={{ width: 137, height: 150 }} />
+					</TouchableOpacity>
 				))}
 			</ScrollView>
 		</View>

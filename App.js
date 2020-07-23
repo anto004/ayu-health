@@ -2,10 +2,23 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Ionicons, Feather } from "@expo/vector-icons";
 import { Avatar, Text } from "react-native-elements";
 import Profile from "./components/Profile";
+import Post from "./components/Post";
+
+const ProfileStack = createStackNavigator();
+
+function ProfileStackScreen() {
+	return (
+		<ProfileStack.Navigator>
+			<ProfileStack.Screen name="Profile" component={Profile} />
+			<ProfileStack.Screen name="Post" component={Post} />
+		</ProfileStack.Navigator>
+	);
+}
 
 function ActivityScreen() {
 	return (
@@ -86,7 +99,7 @@ export default function App() {
 					inactiveTintColor: "gray",
 				}}
 			>
-				<Tab.Screen name="Profile" component={Profile} />
+				<Tab.Screen name="Profile" component={ProfileStackScreen} />
 				<Tab.Screen name="Home" component={HomeScreen} />
 				<Tab.Screen name="Search" component={SearchScreen} />
 				<Tab.Screen name="Add" component={AddScreen} />

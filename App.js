@@ -9,17 +9,6 @@ import { Avatar, Text } from "react-native-elements";
 import Profile from "./components/Profile";
 import Post from "./components/Post";
 
-const ProfileStack = createStackNavigator();
-
-function ProfileStackScreen() {
-	return (
-		<ProfileStack.Navigator>
-			<ProfileStack.Screen name="Profile" component={Profile} />
-			<ProfileStack.Screen name="Post" component={Post} />
-		</ProfileStack.Navigator>
-	);
-}
-
 function ActivityScreen() {
 	return (
 		<View style={styles.container}>
@@ -54,57 +43,70 @@ function HomeScreen() {
 
 const Tab = createBottomTabNavigator();
 
+function HomeTabs() {
+	return (
+		<Tab.Navigator
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ focused, color, size }) => {
+					let iconName;
+
+					if (route.name === "Home") {
+						return focused ? (
+							<Ionicons name="md-home" size={size} color={color} />
+						) : (
+							<AntDesign name="home" size={size} color={color} />
+						);
+					}
+
+					if (route.name === "Search") {
+						return <Ionicons name="md-search" size={size} color={color} />;
+					}
+
+					if (route.name === "Add") {
+						iconName = focused ? "md-add-circle" : "md-add-circle-outline";
+						return <Ionicons name={iconName} size={size} color={color} />;
+					}
+
+					if (route.name === "Activity") {
+						iconName = focused ? "md-heart" : "md-heart-empty";
+						return <Ionicons name={iconName} size={size} color={color} />;
+					}
+
+					if (route.name === "Profile") {
+						return (
+							<Avatar
+								rounded
+								source={require("./assets/profile-images/profileimage1.jpeg")}
+							/>
+						);
+					}
+				},
+			})}
+			tabBarOptions={{
+				activeTintColor: "black",
+				inactiveTintColor: "gray",
+			}}
+		>
+			<Tab.Screen name="Profile" component={Profile} />
+			<Tab.Screen name="Home" component={HomeScreen} />
+			<Tab.Screen name="Search" component={SearchScreen} />
+			<Tab.Screen name="Add" component={AddScreen} />
+			<Tab.Screen name="Activity" component={ActivityScreen} />
+		</Tab.Navigator>
+	);
+}
+
+// We don't want to display the bottom tab navigator in the Post screen
+// We place the bottom tab navigator in a stack
+const Stack = createStackNavigator();
+
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Tab.Navigator
-				screenOptions={({ route }) => ({
-					tabBarIcon: ({ focused, color, size }) => {
-						let iconName;
-
-						if (route.name === "Home") {
-							return focused ? (
-								<Ionicons name="md-home" size={size} color={color} />
-							) : (
-								<AntDesign name="home" size={size} color={color} />
-							);
-						}
-
-						if (route.name === "Search") {
-							return <Ionicons name="md-search" size={size} color={color} />;
-						}
-
-						if (route.name === "Add") {
-							iconName = focused ? "md-add-circle" : "md-add-circle-outline";
-							return <Ionicons name={iconName} size={size} color={color} />;
-						}
-
-						if (route.name === "Activity") {
-							iconName = focused ? "md-heart" : "md-heart-empty";
-							return <Ionicons name={iconName} size={size} color={color} />;
-						}
-
-						if (route.name === "Profile") {
-							return (
-								<Avatar
-									rounded
-									source={require("./assets/profile-images/profileimage1.jpeg")}
-								/>
-							);
-						}
-					},
-				})}
-				tabBarOptions={{
-					activeTintColor: "black",
-					inactiveTintColor: "gray",
-				}}
-			>
-				<Tab.Screen name="Profile" component={ProfileStackScreen} />
-				<Tab.Screen name="Home" component={HomeScreen} />
-				<Tab.Screen name="Search" component={SearchScreen} />
-				<Tab.Screen name="Add" component={AddScreen} />
-				<Tab.Screen name="Activity" component={ActivityScreen} />
-			</Tab.Navigator>
+			<Stack.Navigator>
+				<Stack.Screen name="Home" component={HomeTabs} />
+				<Stack.Screen name="Post" component={Post} />
+			</Stack.Navigator>
 		</NavigationContainer>
 	);
 }

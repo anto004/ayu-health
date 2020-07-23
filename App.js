@@ -1,13 +1,16 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Ionicons, Feather } from "@expo/vector-icons";
 import { Avatar, Text } from "react-native-elements";
+import reducer from "./reducers";
 import Profile from "./components/Profile";
 import Post from "./components/Post";
+import Comments from "./components/Comments";
 import { DATA } from "./data/userdata";
 
 const USERNAME = DATA[0].username;
@@ -103,24 +106,29 @@ function HomeTabs() {
 // We place the bottom tab navigator in a stack
 const Stack = createStackNavigator();
 
+const store = createStore(reducer);
+
 export default function App() {
 	return (
-		<NavigationContainer>
-			<Stack.Navigator>
-				<Stack.Screen
-					name="Home"
-					component={HomeTabs}
-					options={{
-						title: USERNAME,
-						headerTitleStyle: {
-							alignSelf: "center",
-							fontSize: 18,
-						},
-					}}
-				/>
-				<Stack.Screen name="Post" component={Post} />
-			</Stack.Navigator>
-		</NavigationContainer>
+		<Provider store={store}>
+			<NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen
+						name="Home"
+						component={HomeTabs}
+						options={{
+							title: USERNAME,
+							headerTitleStyle: {
+								alignSelf: "center",
+								fontSize: 18,
+							},
+						}}
+					/>
+					<Stack.Screen name="Post" component={Post} />
+					<Stack.Screen name="Comments" component={Comments} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
 	);
 }
 

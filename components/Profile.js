@@ -78,7 +78,9 @@ const Profile = ({ route, navigation }) => {
 				{user.posts.map((post, index) => (
 					<TouchableOpacity
 						key={index}
-						onPress={() => navigation.navigate("Post")}
+						onPress={() =>
+							navigation.navigate("Post", { userId: user.id, postId: post.id })
+						}
 					>
 						<Image source={post.uri} style={{ width: 137, height: 150 }} />
 					</TouchableOpacity>

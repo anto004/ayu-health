@@ -10,7 +10,20 @@ import { connect } from "react-redux";
 import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
 import { Text, Button } from "react-native-elements";
 
-function Post({ route, navigation, post }) {
+function ShowSingleComment({ comment, commentUserName }) {
+	return (
+		<View>
+			{comment && (
+				<View style={styles.commentContainer}>
+					<Text style={styles.username}>{commentUserName}</Text>
+					<Text style={{ marginLeft: 4 }}>{comment}</Text>
+				</View>
+			)}
+		</View>
+	);
+}
+
+function Post({ route, navigation, post, username, commentUserName, comment }) {
 	const [heartPress, setHeartPress] = useState(false);
 	const [sharePress, setSharePress] = useState(false);
 	const [savePress, setSavePress] = useState(false);
@@ -41,9 +54,9 @@ function Post({ route, navigation, post }) {
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity onPress={() => handleDoubleTap()}>
+			<TouchableWithoutFeedback onPress={() => handleDoubleTap()}>
 				<Image source={post.uri} style={styles.image} />
-			</TouchableOpacity>
+			</TouchableWithoutFeedback>
 			<View style={styles.likes}>
 				<Button
 					type="clear"
@@ -78,6 +91,14 @@ function Post({ route, navigation, post }) {
 					containerStyle={styles.saveButton}
 				/>
 			</View>
+			<View style={{ marginLeft: 10 }}>
+				<Text>{`Liked`}</Text>
+			</View>
+			<View style={styles.postDescriptionContainer}>
+				<Text style={styles.username}>{username}</Text>
+				<Text style={{ marginLeft: 4 }}>{post.postDescription}</Text>
+			</View>
+			<ShowSingleComment comment={comment} commentUserName={commentUserName} />
 		</View>
 	);
 }
@@ -105,15 +126,46 @@ const styles = StyleSheet.create({
 		alignSelf: "flex-end",
 		marginLeft: 250,
 	},
+	postDescriptionContainer: {
+		flexDirection: "row",
+		marginLeft: 10,
+		marginTop: 4,
+	},
+	username: {
+		fontWeight: "bold",
+	},
+	commentContainer: {
+		flexDirection: "row",
+		marginLeft: 10,
+		marginTop: 4,
+	},
 });
+
 const mapStateToProps = (state, { route }) => {
 	const { userId, postId } = route.params;
 	const post = state
 		.filter((user) => user.id === userId)[0]
 		.posts.filter((post) => post.id === postId)[0];
+
+	const comments = post.comments;
+	let comment = "";
+
+	let commentUserName = null;
+	if (comments) {
+		const commentUserId = comments[comments.length - 1].commentUserId;
+		comment = comments[comments.length - 1].comment;
+
+		commentUserName = state.filter((user) => user.id === commentUserId)[0]
+			.username;
+	}
 	console.log("Post: ", post);
+	console.log("CommentUserName", commentUserName);
+
 	return {
+		username: state.filter((user) => user.id === userId)[0].username,
 		post: post,
+		comment: comment,
+		commentUserName: commentUserName,
 	};
 };
 

@@ -7,8 +7,8 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 import { connect } from "react-redux";
-import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
-import { Text, Button } from "react-native-elements";
+import { AntDesign, FontAwesome, Entypo, Octicons } from "@expo/vector-icons";
+import { Text, Button, Avatar } from "react-native-elements";
 
 function ShowSingleComment({ comment, commentUserName }) {
 	return (
@@ -19,6 +19,27 @@ function ShowSingleComment({ comment, commentUserName }) {
 					<Text style={{ marginLeft: 4 }}>{comment}</Text>
 				</View>
 			)}
+		</View>
+	);
+}
+
+function PostHeader({ username }) {
+	return (
+		<View style={styles.headerContainer}>
+			<View style={{ flexDirection: "row" }}>
+				<Avatar
+					rounded
+					source={require("../assets/profile-images/profileimage1.jpeg")}
+					size="small"
+					containerStyle={{ marginLeft: 2, marginTop: 2 }}
+				/>
+				<Text style={{ fontSize: 15, marginLeft: 10 }}>{username}</Text>
+			</View>
+
+			<Button
+				type="clear"
+				icon={<Octicons name="kebab-vertical" size={24} color="black" />}
+			/>
 		</View>
 	);
 }
@@ -54,6 +75,7 @@ function Post({ route, navigation, post, username, commentUserName, comment }) {
 
 	return (
 		<View style={styles.container}>
+			<PostHeader username={username} />
 			<TouchableWithoutFeedback onPress={() => handleDoubleTap()}>
 				<Image source={post.uri} style={styles.image} />
 			</TouchableWithoutFeedback>
@@ -109,6 +131,12 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		//alignItems: "center",
 		justifyContent: "flex-start",
+	},
+	headerContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-between",
+		margin: 7,
 	},
 	image: {
 		height: 300,

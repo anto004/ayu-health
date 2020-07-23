@@ -10,7 +10,7 @@ export const DATA = [
 			{
 				id: 100,
 				uri: require("../assets/post-images/postimage1.jpg"),
-				liked: 50,
+				liked: 765,
 				postDescription: "Photo of the Day! Top of the world 🙂",
 				comments: [
 					{
@@ -20,15 +20,15 @@ export const DATA = [
 					},
 					{
 						id: 201,
-						comment: "Cool!",
-						commentUserId: 3,
+						comment: "What a view!",
+						commentUserId: 2,
 					},
 				],
 			},
 			{
 				id: 101,
 				uri: require("../assets/post-images/postimage2.jpg"),
-				liked: 50,
+				liked: 987,
 				postDescription: "Photo of the Day! Sunset☀️",
 				comments: [
 					{
@@ -46,7 +46,7 @@ export const DATA = [
 			{
 				id: 102,
 				uri: require("../assets/post-images/postimage3.jpg"),
-				liked: 50,
+				liked: 345,
 				postDescription: "Photo of the Day! Time in the cabin",
 				comments: [
 					{
@@ -56,7 +56,7 @@ export const DATA = [
 					},
 					{
 						id: 205,
-						comment: "Cool!",
+						comment: "Relaxing!",
 						commentUserId: 3,
 					},
 				],
@@ -64,8 +64,8 @@ export const DATA = [
 			{
 				id: 103,
 				uri: require("../assets/post-images/postimage4.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! ",
+				liked: 983,
+				postDescription: "Photo of the Day! Being productive",
 				comments: [
 					{
 						id: 206,
@@ -74,15 +74,15 @@ export const DATA = [
 					},
 					{
 						id: 207,
-						comment: "Cool!",
-						commentUserId: 3,
+						comment: "Let's get it done!",
+						commentUserId: 4,
 					},
 				],
 			},
 			{
 				id: 104,
 				uri: require("../assets/post-images/postimage5.jpg"),
-				liked: 50,
+				liked: 432,
 				postDescription: "Photo of the Day! During the protest",
 				comments: [
 					{
@@ -92,8 +92,8 @@ export const DATA = [
 					},
 					{
 						id: 209,
-						comment: "Cool!",
-						commentUserId: 3,
+						comment: "Let's stand up together!",
+						commentUserId: 2,
 					},
 				],
 			},
@@ -104,7 +104,7 @@ export const DATA = [
 				postDescription: "Photo of the Day! Beautiful Sunset",
 				comments: [
 					{
-						id: 210,
+						id: 123,
 						comment: "Nice View!",
 						commentUserId: 2,
 					},
@@ -118,7 +118,7 @@ export const DATA = [
 			{
 				id: 106,
 				uri: require("../assets/post-images/postimage7.jpg"),
-				liked: 50,
+				liked: 983,
 				postDescription: "Photo of the Day! Time in the cabin",
 				comments: [
 					{
@@ -136,7 +136,7 @@ export const DATA = [
 			{
 				id: 107,
 				uri: require("../assets/post-images/postimage8.jpg"),
-				liked: 50,
+				liked: 230,
 				postDescription: "Photo of the Day! Let's meet up here next time",
 				comments: [
 					{
@@ -146,15 +146,15 @@ export const DATA = [
 					},
 					{
 						id: 215,
-						comment: "Cool!",
-						commentUserId: 3,
+						comment: "Let's have lunch!",
+						commentUserId: 4,
 					},
 				],
 			},
 			{
 				id: 108,
 				uri: require("../assets/post-images/postimage9.jpg"),
-				liked: 50,
+				liked: 123,
 				postDescription: "Photo of the Day! Evening walk ❤️",
 				comments: [
 					{
@@ -164,133 +164,133 @@ export const DATA = [
 					},
 					{
 						id: 217,
-						comment: "Cool!",
+						comment: "Peaceful!",
 						commentUserId: 3,
 					},
 				],
 			},
 			{
-				id: 108,
+				id: 109,
 				uri: require("../assets/post-images/postimage10.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! Evening walk ❤️",
+				liked: 563,
+				postDescription: "Photo of the Day! Party with these guys 🍺",
 				comments: [
 					{
-						id: 216,
+						id: 218,
 						comment: "Nice View!",
 						commentUserId: 2,
 					},
 					{
-						id: 217,
-						comment: "Cool!",
-						commentUserId: 3,
+						id: 219,
+						comment: "Hungover!",
+						commentUserId: 2,
 					},
 				],
 			},
 			{
-				id: 108,
+				id: 110,
 				uri: require("../assets/post-images/postimage11.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! Evening walk ❤️",
+				liked: 922,
+				postDescription: "Photo of the Day! Friends",
 				comments: [
 					{
-						id: 216,
+						id: 220,
 						comment: "Nice View!",
 						commentUserId: 2,
 					},
 					{
-						id: 217,
-						comment: "Cool!",
-						commentUserId: 3,
+						id: 221,
+						comment: "Nice Jump!",
+						commentUserId: 4,
 					},
 				],
 			},
 			{
-				id: 108,
+				id: 111,
 				uri: require("../assets/post-images/postimage12.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! Evening walk ❤️",
+				liked: 245,
+				postDescription: "Photo of the Day! No bad days 🐶",
 				comments: [
 					{
-						id: 216,
+						id: 222,
 						comment: "Nice View!",
-						commentUserId: 2,
+						commentUserId: 3,
 					},
 					{
-						id: 217,
-						comment: "Cool!",
-						commentUserId: 3,
+						id: 223,
+						comment: "Stay happy!",
+						commentUserId: 2,
 					},
 				],
 			},
 			{
-				id: 108,
+				id: 112,
 				uri: require("../assets/post-images/postimage13.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! Evening walk ❤️",
+				liked: 243,
+				postDescription: "Photo of the Day! We're family ❤️",
 				comments: [
 					{
-						id: 216,
+						id: 224,
 						comment: "Nice View!",
 						commentUserId: 2,
 					},
 					{
-						id: 217,
-						comment: "Cool!",
+						id: 225,
+						comment: "Family time is the best!",
 						commentUserId: 3,
 					},
 				],
 			},
 			{
-				id: 108,
+				id: 113,
 				uri: require("../assets/post-images/postimage14.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! Evening walk ❤️",
+				liked: 982,
+				postDescription: "Photo of the Day! Just a happy puppy 🐶",
 				comments: [
 					{
-						id: 216,
+						id: 226,
 						comment: "Nice View!",
 						commentUserId: 2,
 					},
 					{
-						id: 217,
-						comment: "Cool!",
+						id: 227,
+						comment: "Cutie!",
 						commentUserId: 3,
 					},
 				],
 			},
 			{
-				id: 108,
+				id: 114,
 				uri: require("../assets/post-images/postimage15.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! Evening walk ❤️",
+				liked: 24,
+				postDescription: "Photo of the Day! Friends",
 				comments: [
 					{
-						id: 216,
+						id: 228,
 						comment: "Nice View!",
 						commentUserId: 2,
 					},
 					{
-						id: 217,
-						comment: "Cool!",
+						id: 229,
+						comment: "Looking great!",
 						commentUserId: 3,
 					},
 				],
 			},
 			{
-				id: 108,
+				id: 115,
 				uri: require("../assets/post-images/postimage16.jpg"),
-				liked: 50,
-				postDescription: "Photo of the Day! Evening walk ❤️",
+				liked: 292,
+				postDescription: "Photo of the Day! Puppy at the beach🐶 ",
 				comments: [
 					{
-						id: 216,
+						id: 230,
 						comment: "Nice View!",
 						commentUserId: 2,
 					},
 					{
-						id: 217,
-						comment: "Cool!",
+						id: 231,
+						comment: "Cute!",
 						commentUserId: 3,
 					},
 				],

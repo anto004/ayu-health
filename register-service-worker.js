@@ -1,0 +1,1 @@
+"serviceWorker"in navigator&&window.addEventListener("load",(function(){navigator.serviceWorker.register("/ayu-health/expo-service-worker.js",{scope:"/ayu-health/"}).then((function(e){})).catch((function(e){console.info("Failed to register service-worker",e)}))}));

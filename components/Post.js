@@ -63,7 +63,7 @@ function Post({ route, navigation, post, username, commentUserName, comment }) {
 	);
 
 	let lastTap = null;
-	handleDoubleTap = () => {
+	const handleDoubleTap = () => {
 		const now = Date.now();
 		const DOUBLE_PRESS_DELAY = 300;
 		if (lastTap && now - lastTap < DOUBLE_PRESS_DELAY) {
@@ -171,14 +171,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, { route }) => {
 	const { userId, postId } = route.params;
+	let comment = "";
+	let commentUserName = null;
+
 	const post = state
 		.filter((user) => user.id === userId)[0]
 		.posts.filter((post) => post.id === postId)[0];
 
 	const comments = post.comments;
-	let comment = "";
 
-	let commentUserName = null;
 	if (comments) {
 		const commentUserId = comments[comments.length - 1].commentUserId;
 		comment = comments[comments.length - 1].comment;

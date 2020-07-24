@@ -1,4 +1,4 @@
-import { ADD_COMMENT, POST_LIKED } from "../actions/index";
+import { ADD_COMMENT, POST_LIKED, COMMENT_LIKED } from "../actions/index";
 import { DATA } from "../data/userdata";
 
 export default (state = DATA, actions) => {
@@ -28,6 +28,26 @@ export default (state = DATA, actions) => {
 							post.liked = likedCount;
 							console.log("POST_LIKED: ", post);
 							return post;
+						}
+						return post;
+					});
+				}
+				return user;
+			});
+
+		case COMMENT_LIKED:
+			return state.map((user, i) => {
+				if (user.id === userId) {
+					return user.posts.map((post, j) => {
+						if (post.id === postId) {
+							return post.comments.map((comment) => {
+								if (comment.id === commentId) {
+									comment.liked = likedCount;
+									console.log("comment: ", comment);
+									return comment;
+								}
+								return comment;
+							});
 						}
 						return post;
 					});

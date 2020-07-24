@@ -124,8 +124,17 @@ export default function App() {
 							},
 						}}
 					/>
-					<Stack.Screen name="Post" component={Post} options={{}} />
-					<Stack.Screen name="Comments" component={Comments} />
+					<Stack.Screen name="Post" component={Post} />
+					<Stack.Screen
+						name="Comments"
+						component={Comments}
+						options={{
+							headerTitleStyle: {
+								alignSelf: "center",
+								fontSize: 18,
+							},
+						}}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>

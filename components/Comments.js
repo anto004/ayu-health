@@ -1,23 +1,30 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { CommonActions } from "@react-navigation/native";
 import { Text, Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { addComment } from "../actions/index";
+import { addComment, commentLiked } from "../actions/index";
 import { uuid } from "../utils/helper";
+import Comment from "./Comment";
+import { ScrollView } from "react-native-gesture-handler";
 
 function Comments({ route, navigation, comments, dispatchAddComment }) {
 	const [comment, setComment] = useState("");
 
 	// Args for dispatchAddComment
 	// id, userId, postId, commentUserId, comment
+	// comment: id, liked, timestamp, comment, commentUserId
 	const handleSubmit = () => {
 		const { userId, postId } = route.params;
 		const id = uuid();
+		const liked = 0;
+		const timestamp = Date.now();
 		const commentUserId = userId; // User commenting on their post
 		const newComment = {
 			id,
+			liked,
+			timestamp,
 			commentUserId,
 			comment,
 		};
@@ -33,8 +40,12 @@ function Comments({ route, navigation, comments, dispatchAddComment }) {
 	};
 
 	return (
-		<View>
-			<Text h4>Comments Component</Text>
+		<View style={styles.container}>
+			<ScrollView>
+				{comments.map((comment) => (
+					<Comment key={comment.id} comment={comment} />
+				))}
+			</ScrollView>
 			<Input
 				placeholder="Add a comment"
 				autoFocus={true}
@@ -61,10 +72,19 @@ const mapStateToProps = (state, { route }) => {
 	};
 };
 
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: "white",
+	},
+});
+
 const dispatchPropsToState = (dispatch) => {
 	return {
 		dispatchAddComment: (userId, postId, newComment) =>
 			dispatch(addComment(userId, postId, newComment)),
+		dispatchCommentLiked: (userId, postId, commentId, likedCount) =>
+			dispatch(commentLiked(userId, postId, commentId, likedCount)),
 	};
 };
 

@@ -47,6 +47,7 @@ function Comments({ route, navigation, comments, dispatchAddComment }) {
 					<Comment key={comment.id} comment={comment} route={route} />
 				))}
 			</ScrollView>
+
 			<Input
 				placeholder="Add a comment"
 				autoFocus={true}
@@ -63,7 +64,7 @@ function Comments({ route, navigation, comments, dispatchAddComment }) {
 }
 const mapStateToProps = (state, { route }) => {
 	const { userId, postId } = route.params;
-	console.log("UserId: ", userId, " postId, ", postId);
+
 	const post = state
 		.filter((user) => user.id === userId)[0]
 		.posts.filter((post) => post.id === postId)[0];

@@ -3,7 +3,6 @@ import {
 	View,
 	Image,
 	StyleSheet,
-	TouchableOpacity,
 	TouchableWithoutFeedback,
 } from "react-native";
 import { connect } from "react-redux";
@@ -100,9 +99,11 @@ function Post({
 	return (
 		<View style={styles.container}>
 			<PostHeader username={username} />
+
 			<TouchableWithoutFeedback onPress={() => handleDoubleTap()}>
 				<Image source={post.uri} style={styles.image} />
 			</TouchableWithoutFeedback>
+
 			<View style={styles.likes}>
 				<Button
 					type="clear"
@@ -140,6 +141,7 @@ function Post({
 					containerStyle={styles.saveButton}
 				/>
 			</View>
+
 			<View
 				style={{ flexDirection: "row", marginLeft: 10, alignItems: "center" }}
 			>
@@ -164,7 +166,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
-		//alignItems: "center",
 		justifyContent: "flex-start",
 	},
 	headerContainer: {
@@ -222,14 +223,12 @@ const mapStateToProps = (state, { route }) => {
 		commentUserName = state.filter((user) => user.id === commentUserId)[0]
 			.username;
 	}
-	//console.log("Post: ", post);
-	//console.log("CommentUserName", commentUserName);
 
 	return {
 		username: state.filter((user) => user.id === userId)[0].username,
+		commentUserName: commentUserName,
 		post: post,
 		comment: comment,
-		commentUserName: commentUserName,
 		liked: post.liked,
 	};
 };

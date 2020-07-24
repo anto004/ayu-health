@@ -46,12 +46,8 @@ function formatElapsedDays(days) {
 
 // input past date: "2020-07-23"
 export function elapsedDays(past) {
-	console.log("Past date", past);
 	const pastDate = Date.parse(past);
-	console.log("Parsed date", pastDate);
 	const millis = Date.now() - pastDate;
-
-	console.log(`days elapsed = ${Math.floor(millis / (1000 * 60 * 60 * 24))}`);
 
 	const days = Math.floor(millis / (1000 * 60 * 60 * 24));
 

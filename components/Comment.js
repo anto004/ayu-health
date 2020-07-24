@@ -1,23 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { CommonActions } from "@react-navigation/native";
-import { Text, Button, Input, Avatar } from "react-native-elements";
+import { Text, Button, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { addComment, commentLiked } from "../actions/index";
+import { commentLiked } from "../actions/index";
 import { elapsedDays } from "../utils/helper";
 
-function Comment({ route, navigation, comment, dispatchCommentLiked }) {
-	const { userId, postId } = route.params;
+function Comment({ route, comment, dispatchCommentLiked }) {
 	const [heartPress, setHeartPress] = useState(false);
 	const [liked, setLiked] = useState(comment.liked);
-	console.log("Timestamp: ", comment.timestamp);
+	const { userId, postId } = route.params;
 	const daysAgo = elapsedDays(comment.timestamp);
 
 	useEffect(() => {
-		//userId, postId, commentId, likedCount
-		const commentId = comment.id;
-		dispatchCommentLiked(userId, postId, commentId, liked);
+		dispatchCommentLiked(userId, postId, comment.id, liked);
 	});
 
 	const heartName = heartPress ? "heart" : "hearto";
@@ -55,6 +51,7 @@ function Comment({ route, navigation, comment, dispatchCommentLiked }) {
 				</View>
 				<View style={styles.seperator}></View>
 			</View>
+
 			<Button
 				type="clear"
 				icon={
@@ -114,24 +111,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const mapStateToProps = (state, { route }) => {
-	//const { userId, postId, commentId } = route.params;
-	//console.log(
-	//	"UserId: ",
-	//	userId,
-	//	" postId, ",
-	//	postId,
-	//	"commentId: ",
-	//	commentId
-	//);
-	//const post = state
-	//	.filter((user) => user.id === userId)[0]
-	//	.posts.filter((post) => post.id === postId)[0];
-
-	//const comment = post.comments.filter(
-	//	(comment) => comment.id === commentId
-	//)[0];
-
+const mapStateToProps = (state) => {
 	return {};
 };
 

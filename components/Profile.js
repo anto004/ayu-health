@@ -52,7 +52,7 @@ const Header = () => {
 	);
 };
 
-const Profile = ({ route, navigation }) => {
+const Profile = ({ navigation }) => {
 	const user = DATA[0];
 
 	return (
@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "flex-start",
 	},
-
 	avatarStyle: {
 		margin: 10,
 		marginRight: 20,
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
 	postFollowStyle: {
 		flexDirection: "row",
 		justifyContent: "space-around",
-		//backgroundColor: "yellow",
 		width: 270,
 		marginTop: 12,
 		marginLeft: 5,
@@ -117,7 +115,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		width: 250,
 		marginLeft: 7,
-		//backgroundColor: "brown",
 	},
 	followButtonStyle: {
 		height: 22,
@@ -139,7 +136,6 @@ const styles = StyleSheet.create({
 		margin: 0,
 		padding: 0,
 	},
-
 	bio: {
 		marginLeft: 12,
 		marginTop: 2,

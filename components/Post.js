@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	Image,
@@ -9,6 +9,7 @@ import {
 import { connect } from "react-redux";
 import { AntDesign, FontAwesome, Entypo, Octicons } from "@expo/vector-icons";
 import { Text, Button, Avatar } from "react-native-elements";
+import { postLiked } from "../actions/index";
 
 function ShowSingleComment({ comment, commentUserName }) {
 	return (
@@ -44,18 +45,32 @@ function PostHeader({ username }) {
 	);
 }
 
-function Post({ route, navigation, post, username, commentUserName, comment }) {
+function Post({
+	route,
+	navigation,
+	post,
+	username,
+	commentUserName,
+	comment,
+	liked,
+	dispatchLikedCount,
+}) {
 	const [heartPress, setHeartPress] = useState(false);
 	const [sharePress, setSharePress] = useState(false);
 	const [savePress, setSavePress] = useState(false);
+	const [likedCount, setLikedCount] = useState(liked);
 	const { userId, postId } = route.params;
+
+	useEffect(() => {
+		dispatchLikedCount(userId, postId, likedCount);
+	});
+
 	const heartName = heartPress ? "heart" : "hearto";
 	const shareIcon = sharePress ? (
 		<Entypo name="share" size={24} color="black" />
 	) : (
 		<AntDesign name="sharealt" size={24} color="black" />
 	);
-
 	const saveIcon = savePress ? (
 		<Entypo name="save" size={24} color="black" />
 	) : (
@@ -68,8 +83,17 @@ function Post({ route, navigation, post, username, commentUserName, comment }) {
 		const DOUBLE_PRESS_DELAY = 300;
 		if (lastTap && now - lastTap < DOUBLE_PRESS_DELAY) {
 			setHeartPress(!heartPress);
+			handleLikedCount();
 		} else {
 			lastTap = now;
+		}
+	};
+
+	const handleLikedCount = () => {
+		if (!heartPress) {
+			setLikedCount(likedCount + 1);
+		} else {
+			setLikedCount(likedCount - 1);
 		}
 	};
 
@@ -113,8 +137,16 @@ function Post({ route, navigation, post, username, commentUserName, comment }) {
 					containerStyle={styles.saveButton}
 				/>
 			</View>
-			<View style={{ marginLeft: 10 }}>
-				<Text>{`Liked`}</Text>
+			<View
+				style={{ flexDirection: "row", marginLeft: 10, alignItems: "center" }}
+			>
+				<Button
+					type="clear"
+					title="Liked"
+					titleStyle={{ color: "black" }}
+					onPress={() => handleLikedCount()}
+				/>
+				<Text style={{ marginTop: 2 }}>{likedCount}</Text>
 			</View>
 			<View style={styles.postDescriptionContainer}>
 				<Text style={styles.username}>{username}</Text>
@@ -187,19 +219,23 @@ const mapStateToProps = (state, { route }) => {
 		commentUserName = state.filter((user) => user.id === commentUserId)[0]
 			.username;
 	}
-	console.log("Post: ", post);
-	console.log("CommentUserName", commentUserName);
+	//console.log("Post: ", post);
+	//console.log("CommentUserName", commentUserName);
 
 	return {
 		username: state.filter((user) => user.id === userId)[0].username,
 		post: post,
 		comment: comment,
 		commentUserName: commentUserName,
+		liked: post.liked,
 	};
 };
 
 const dispatchPropsToState = (dispatch) => {
-	return {};
+	return {
+		dispatchLikedCount: (userId, postId, likedCount) =>
+			dispatch(postLiked(userId, postId, likedCount)),
+	};
 };
 
 export default connect(mapStateToProps, dispatchPropsToState)(Post);

@@ -113,7 +113,10 @@ function Post({
 							color={heartPress ? "#fb3958" : "black"}
 						/>
 					}
-					onPress={() => setHeartPress(!heartPress)}
+					onPress={() => {
+						setHeartPress(!heartPress);
+						handleLikedCount();
+					}}
 				/>
 				<Button
 					type="clear"

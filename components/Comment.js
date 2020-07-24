@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { CommonActions } from "@react-navigation/native";
@@ -7,12 +7,28 @@ import { AntDesign } from "@expo/vector-icons";
 import { addComment, commentLiked } from "../actions/index";
 import { elapsedDays } from "../utils/helper";
 
-function Comment({ route, navigation, comment }) {
+function Comment({ route, navigation, comment, dispatchCommentLiked }) {
+	const { userId, postId } = route.params;
 	const [heartPress, setHeartPress] = useState(false);
 	const [liked, setLiked] = useState(comment.liked);
+	console.log("Timestamp: ", comment.timestamp);
 	const daysAgo = elapsedDays(comment.timestamp);
 
+	useEffect(() => {
+		//userId, postId, commentId, likedCount
+		const commentId = comment.id;
+		dispatchCommentLiked(userId, postId, commentId, liked);
+	});
+
 	const heartName = heartPress ? "heart" : "hearto";
+
+	const handleLikedCount = () => {
+		if (!heartPress) {
+			setLiked(liked + 1);
+		} else {
+			setLiked(liked - 1);
+		}
+	};
 
 	return (
 		<View style={styles.container}>
@@ -37,7 +53,6 @@ function Comment({ route, navigation, comment }) {
 						titleStyle={{ color: "gray", fontSize: 13 }}
 					/>
 				</View>
-
 				<View style={styles.seperator}></View>
 			</View>
 			<Button
@@ -49,7 +64,10 @@ function Comment({ route, navigation, comment }) {
 						color={heartPress ? "#fb3958" : "black"}
 					/>
 				}
-				onPress={() => setHeartPress(!heartPress)}
+				onPress={() => {
+					setHeartPress(!heartPress);
+					handleLikedCount();
+				}}
 			/>
 		</View>
 	);
@@ -114,9 +132,7 @@ const mapStateToProps = (state, { route }) => {
 	//	(comment) => comment.id === commentId
 	//)[0];
 
-	return {
-		//likedProp: comment ? comment.liked : 0,
-	};
+	return {};
 };
 
 const dispatchPropsToState = (dispatch) => {

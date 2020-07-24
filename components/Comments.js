@@ -8,6 +8,7 @@ import { addComment, commentLiked } from "../actions/index";
 import { uuid } from "../utils/helper";
 import Comment from "./Comment";
 import { ScrollView } from "react-native-gesture-handler";
+import { timeToString } from "../utils/helper";
 
 function Comments({ route, navigation, comments, dispatchAddComment }) {
 	const [comment, setComment] = useState("");
@@ -19,7 +20,7 @@ function Comments({ route, navigation, comments, dispatchAddComment }) {
 		const { userId, postId } = route.params;
 		const id = uuid();
 		const liked = 0;
-		const timestamp = Date.now();
+		const timestamp = timeToString();
 		const commentUserId = userId; // User commenting on their post
 		const newComment = {
 			id,
@@ -43,7 +44,7 @@ function Comments({ route, navigation, comments, dispatchAddComment }) {
 		<View style={styles.container}>
 			<ScrollView>
 				{comments.map((comment) => (
-					<Comment key={comment.id} comment={comment} />
+					<Comment key={comment.id} comment={comment} route={route} />
 				))}
 			</ScrollView>
 			<Input
